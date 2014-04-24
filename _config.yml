@@ -1,5 +1,52 @@
-port: 4000
-auto: true
-safe: true
-server: true
-pygments: true
+# Dependencies
+markdown:	redcarpet
+pygments:	true
+
+# Permalinks
+permalink:	pretty
+
+# Setup
+title:		Per Aspera Ad Astra
+tagline:	'blog'
+description:	'Soldier of fortune searching for enlightment.'
+url:		http://nikitin.me
+
+author:
+  name:		'Roman Nikitin'
+  url:		http://nikitin.me
+
+paginate:	5
+
+# Custom vars
+icon:		/assets/images/icon.png
+cover:		/assets/images/cover.jpg
+
+social:
+  - icon:	twitter
+    url:	https://twitter.com/rnikitin
+    desc:	Follow me on twitter
+
+  - icon:	github
+    url:	https://github.com/rnikitin
+    desc:	Fork me on github
+
+  - icon:	 facebook
+    url:	https://fb.me/rnikitin
+    desc:	Add me on Facebook
+
+  - icon:	feed
+    url:	http://nikitin.me/atom.xml
+    desc:	Subscribe to my feed
+
+menu:
+  - title:	Home
+    url:	/
+
+  - title:	About
+    url:	/about
+
+copyright:
+  author:	Roman Nikitin
+  url:		http://nikitin.me
+  type_title:	Some rights reserved
+  type_url:	http://creativecommons.org/licenses/by-nc/2.5
