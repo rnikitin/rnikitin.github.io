@@ -5,9 +5,9 @@ var qs = null;
 var player = null;
 
 function onYouTubeIframeAPIReady(){
-    console.log('youtube ready!');
-
     qs = getQueryString();
+
+    console.log('youtube ready!', qs, window);
 
    if (qs['videoId'] == null){
        console.log('no videoId provided');
