@@ -1,23 +1,30 @@
-var default_height = 390;
-var default_width = 640;
+var default_h = 315;
+var default_w = 600;
 
-var qs = null;
+var h = default_h;
+var w = default_w;
+
 var player = null;
 
 function onYouTubeIframeAPIReady(){
-    qs = getQueryString();
+    console.log('youtube ready!', qs('videoId'), window);
 
-    console.log('youtube ready!', qs, window);
-
-   if (qs['videoId'] == null){
+   if (qs('videoId') == null){
        console.log('no videoId provided');
        return false;
    }
 
+   if (window.frameElement){
+       console.log('frame', window.frameElement, window.frameElement.getAttribute('width'), window.frameElement.getAttribute('height'));
+       // we are inside iframe
+       var w = window.frameElement.getAttribute('width') || default_w;
+       var h = window.frameElement.getAttribute('height') || default_h;
+   }
+
    player = new YT.Player('player', {
-          height: qs['height'] || default_height,
-          width: qs['width'] || default_width,
-          videoId: qs['videoId'],
+          height: h,
+          width: w,
+          videoId: qs('videoId'),
           events: {
             'onStateChange': onPlayerStateChange
           }
@@ -35,10 +42,10 @@ function onPlayerStateChange(event) {
 
         // try mobile app activator
         if (isMobile.Android()){
-            window.location = 'vnd.youtube://www.youtube.com/watch?v=' + qs['videoId'];
+            window.location = 'vnd.youtube://www.youtube.com/watch?v=' + qs('videoId');
         }
         else {
-            window.location = 'http://www.youtube.com/watch?v=' + qs['videoId'] + '&autoplay=1';
+            window.location = 'http://www.youtube.com/watch?v=' + qs('videoId') + '&autoplay=1';
         }
     }
 
@@ -48,10 +55,9 @@ function onPlayerStateChange(event) {
     }
 }
 
-function getQueryString(){
-    var qd = {};
-    location.search.substr(1).split("&").forEach(function(item) {(item.split("=")[0] in qd) ? qd[item.split("=")[0]].push(item.split("=")[1]) : qd[item.split("=")[0]] = [item.split("=")[1]]})
-    return qd;
+function qs(name) {
+    var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
 }
 
 var isMobile = {
