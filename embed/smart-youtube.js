@@ -33,10 +33,8 @@ function onPlayerReady(event) {
 function onPlayerStateChange(event) {
     console.log('youtube state changed:', event.data);
 
-    if (event.data == YT.PlayerState.PLAYING) {
-        player.stopVideo();
-
-        window.location = 'https://www.youtube.com/watch?v=' + qs['videoId'] + '&autoplay=1';
+    if (event.data == -1) {
+        window.location = 'vnd.youtube://www.youtube.com/watch?v=' + qs['videoId'] + '&autoplay=1';
     }
 }
 function stopVideo() {
