@@ -1,8 +1,8 @@
 var default_h = 315;
 var default_w = 600;
 
-var h = default_h;
-var w = default_w;
+var h = window.innerHeight || default_h;
+var w = window.innerWidth || default_w;
 
 var player = null;
 
@@ -12,13 +12,6 @@ function onYouTubeIframeAPIReady(){
    if (qs('videoId') == null){
        console.log('no videoId provided');
        return false;
-   }
-
-   if (window.frameElement){
-       console.log('frame', window.frameElement, window.frameElement.getAttribute('width'), window.frameElement.getAttribute('height'));
-       // we are inside iframe
-       var w = window.frameElement.getAttribute('width') || default_w;
-       var h = window.frameElement.getAttribute('height') || default_h;
    }
 
    player = new YT.Player('player', {
