@@ -1,8 +1,5 @@
-var default_h = 315;
-var default_w = 600;
-
-var h = window.innerHeight || default_h;
-var w = window.innerWidth || default_w;
+var h = window.innerHeight - 10;
+var w = window.innerWidth - 10;
 
 var player = null;
 
