@@ -7,7 +7,8 @@ var txtconsole = null;
 function onYouTubeIframeAPIReady(){
     txtconsole = document.getElementById('txtconsole');
 
-    log('youtube ready!', navigator.userAgent);
+    log('onYouTubeIframeAPIReady:', navigator.userAgent);
+    log('IsMobile:', isMobile.any(), 'Android:', isMobile.Android(), 'iOS:', isMobile.iOS());
 
    if (qs('videoId') == null){
        console.log('no videoId provided');
@@ -36,10 +37,10 @@ function onPlayerStateChange(event) {
 
         // try mobile app activator
         if (isMobile.Android()){
-            window.location = 'vnd.youtube://www.youtube.com/watch?v=' + qs('videoId');
+            window.location = 'vnd.youtube://www.youtube.com/v/' + qs('videoId');
         }
         else {
-            window.location = 'http://www.youtube.com/watch?v=' + qs('videoId') + '&autoplay=1';
+            window.location = 'https://www.youtube.com/v/' + qs('videoId');
         }
     }
 
