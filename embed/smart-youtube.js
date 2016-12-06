@@ -2,9 +2,12 @@ var h = window.innerHeight - 10;
 var w = window.innerWidth - 10;
 
 var player = null;
+var txtconsole = null;
 
 function onYouTubeIframeAPIReady(){
-    console.log('youtube ready!', qs('videoId'), window);
+    txtconsole = document.getElementById('txtconsole');
+
+    log('youtube ready!', navigator.userAgent);
 
    if (qs('videoId') == null){
        console.log('no videoId provided');
@@ -23,12 +26,13 @@ function onYouTubeIframeAPIReady(){
 
 var alreadyStopped = false;
 function onPlayerStateChange(event) {
-    console.log('youtube state changed:', event.data);
-
     if (!alreadyStopped && event.data == -1 && isMobile.any()) {
         // stop the embedded video
         alreadyStopped = true;
-        player.stopVideo();
+        
+        setTimeout(function(){
+            player.stopVideo();
+        });
 
         // try mobile app activator
         if (isMobile.Android()){
@@ -43,6 +47,17 @@ function onPlayerStateChange(event) {
     if (event.data == YT.PlayerState.CUED){
         alreadyStopped = false;
     }
+}
+
+function log(){
+    var args = Array.prototype.slice.call(arguments);
+
+    // output to dev console
+    Function.apply.call(console.log, console, args);
+
+    // output to textarea console
+    var newline = '\n' + args.join(' ');
+    txtconsole.value += newline;
 }
 
 function qs(name) {
