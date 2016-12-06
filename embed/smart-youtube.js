@@ -30,17 +30,14 @@ function onPlayerStateChange(event) {
     if (!alreadyStopped && event.data == -1 && isMobile.any()) {
         // stop the embedded video
         alreadyStopped = true;
-        
-        setTimeout(function(){
-            player.stopVideo();
-        });
+        //player.stopVideo();
 
-        // try mobile app activator
+        // try redirect to app
         if (isMobile.Android()){
             window.location = 'vnd.youtube://www.youtube.com/v/' + qs('videoId');
         }
         else {
-            window.location = 'https://www.youtube.com/v/' + qs('videoId');
+            window.location = 'http://www.youtube.com/v/' + qs('videoId');
         }
     }
 
