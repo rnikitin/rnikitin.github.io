@@ -2,13 +2,11 @@ var h = window.innerHeight - 10;
 var w = window.innerWidth - 10;
 
 var player = null;
-var txtconsole = null;
 
 function onYouTubeIframeAPIReady(){
-    txtconsole = document.getElementById('txtconsole');
 
-    log('onYouTubeIframeAPIReady:', navigator.userAgent);
-    log('IsMobile:', isMobile.any(), 'Android:', isMobile.Android(), 'iOS:', isMobile.iOS());
+    console.log('onYouTubeIframeAPIReady:', navigator.userAgent);
+    console.log('IsMobile:', isMobile.any(), 'Android:', isMobile.Android(), 'iOS:', isMobile.iOS());
 
    if (qs('videoId') == null){
        console.log('no videoId provided');
@@ -30,14 +28,14 @@ function onPlayerStateChange(event) {
     if (!alreadyStopped && event.data == -1 && isMobile.any()) {
         // stop the embedded video
         alreadyStopped = true;
-        //player.stopVideo();
+        player.stopVideo();
 
         // try redirect to app
         if (isMobile.Android()){
             window.top.location.href = 'vnd.youtube://www.youtube.com/v/' + qs('videoId');
         }
         else {
-            window.top.location.href = 'http://www.youtube.com/v/' + qs('videoId');
+            window.top.location.href = 'http://www.youtube.com/watch?v=' + qs('videoId');
         }
     }
 
@@ -45,17 +43,6 @@ function onPlayerStateChange(event) {
     if (event.data == YT.PlayerState.CUED){
         alreadyStopped = false;
     }
-}
-
-function log(){
-    var args = Array.prototype.slice.call(arguments);
-
-    // output to dev console
-    Function.apply.call(console.log, console, args);
-
-    // output to textarea console
-    var newline = '\n' + args.join(' ');
-    txtconsole.value += newline;
 }
 
 function qs(name) {
