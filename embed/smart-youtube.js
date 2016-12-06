@@ -34,10 +34,10 @@ function onPlayerStateChange(event) {
 
         // try redirect to app
         if (isMobile.Android()){
-            window.location = 'vnd.youtube://www.youtube.com/v/' + qs('videoId');
+            window.top.location.href = 'vnd.youtube://www.youtube.com/v/' + qs('videoId');
         }
         else {
-            window.location = 'http://www.youtube.com/v/' + qs('videoId');
+            window.top.location.href = 'http://www.youtube.com/v/' + qs('videoId');
         }
     }
 
